@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Slider from './Slider';
 
 type Rating = {
   average: number;
@@ -25,12 +26,9 @@ const LandingPage: React.FC = () => {
     fetchData();
   }, []);
 
-  const addItem = (item: BeerType) => {
-    console.log(item);
-  };
-
   return (
     <div className="relative min-h-screen overflow-hidden">
+      <Slider />
       <div className="relative z-10 overflow-y-auto h-screen p-4">
         <h1 className="text-2xl font-bold mb-4 text-white">Beer Store</h1>
         <div className="grid grid-cols-1 md:grid-cols-6 gap-28">
