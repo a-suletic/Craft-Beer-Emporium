@@ -1,3 +1,7 @@
+# install dependencies
+
+npm install
+
 # run application in development mode
 
 npm start
