@@ -29,7 +29,7 @@ export const mapBeerApiToBeer = (apiData: BeerApiType[]): BeerType[] => {
     style: getRandomArrayValue(beerStyles),
     abv: getRandomNumber(4, 12).toString(),
     price: getRandomNumber(10, 100).toString(),
-    dsescription: beer.description,
+    description: beer.description,
     tagline: beer.tagline,
     tips: beer.brewers_tips,
     attenuation: beer.attenuation_level,

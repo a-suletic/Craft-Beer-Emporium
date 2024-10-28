@@ -12,7 +12,7 @@ const initBeer: BeerType = {
   style: '',
   abv: '',
   price: '',
-  dsescription: '',
+  description: '',
   tagline: '',
   tips: '',
   attenuation: '',

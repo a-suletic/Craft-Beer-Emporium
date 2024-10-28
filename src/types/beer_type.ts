@@ -23,7 +23,7 @@ export type BeerType = {
   style: string;
   abv: string;
   price: string;
-  dsescription: string;
+  description: string;
   tagline: string;
   tips: string;
   attenuation: string;

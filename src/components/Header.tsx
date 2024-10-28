@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiShoppingCart } from 'react-icons/fi';
-import LogoImage from '../images/logo_beer.jpg';
+import LogoImage from '../images/logo.jpg';
 import { Link } from 'react-router-dom';
 import { useStore } from '../store/store';
 import { useShallow } from 'zustand/react/shallow';
@@ -11,7 +11,7 @@ const Header = () => {
       total: state.total,
     }))
   );
-
+  console.log(total);
   return (
     <div>
       <header className="fixed top-0 w-full flex justify-between items-center py-4 px-8 z-20">

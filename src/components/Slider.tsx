@@ -16,7 +16,7 @@ const Slider: React.FC = () => {
   }, [activeImage]);
 
   return (
-    <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
+    <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
       {imagesArray.map((image, idx) => (
         <img
           key={idx}
