@@ -34,6 +34,7 @@ module.exports = {
       },
     ],
   },
+  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       // inject the bundle.js file into the index.html file and place that html file in the dist folder
@@ -44,6 +45,7 @@ module.exports = {
   devServer: {
     static: path.join(__dirname, 'dist'),
     compress: true,
+    historyApiFallback: true,
     port: 3000,
     hot: true, // Enables Hot Module Replacement in development
   },
