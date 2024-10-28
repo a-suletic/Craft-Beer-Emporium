@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client'; // Import createRoot
-import App from './components/App';
+import App from './App';
 import './styles/tailwind.css';
 
 const container = document.getElementById('root');
