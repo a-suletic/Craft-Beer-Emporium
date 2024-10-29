@@ -6,6 +6,7 @@ import { StoreType } from '../types/store_type';
 import { createUserSlice } from './user-slice';
 import { createCartSlice } from './cart-slice';
 import { createBeerSlice } from './beer-slice';
+import { createFilterSlice } from './filter-slice';
 
 export const useStore = create<StoreType>()(
   devtools(
@@ -14,6 +15,7 @@ export const useStore = create<StoreType>()(
         ...createUserSlice(...a),
         ...createCartSlice(...a),
         ...createBeerSlice(...a),
+        ...createFilterSlice(...a),
       })),
       {
         name: 'beer-storage',

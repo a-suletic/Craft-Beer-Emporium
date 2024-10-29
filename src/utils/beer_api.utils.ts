@@ -1,15 +1,5 @@
 import { BeerApiType, BeerType } from '../types/beer_type';
-
-// Sample arrays for random values
-const beerStyles = ['IPA', 'Stout', 'Lager', 'Pilsner', 'Ale', 'Porter'];
-const breweries = [
-  'BrewDog',
-  'Stone Brewing',
-  'Sierra Nevada',
-  'Lagunitas',
-  'Founders',
-  'Dogfish Head',
-];
+import { BREWARIES, BEER_STYLE } from './constants';
 
 // Function to get a random value from an array
 const getRandomArrayValue = <T>(arr: T[]): T =>
@@ -24,11 +14,11 @@ export const mapBeerApiToBeer = (apiData: BeerApiType[]): BeerType[] => {
   return apiData.map((beer) => ({
     id: beer._id,
     name: beer.name,
-    brand: getRandomArrayValue(breweries),
+    brand: getRandomArrayValue(BREWARIES),
     image: beer.image_url,
-    style: getRandomArrayValue(beerStyles),
-    abv: getRandomNumber(4, 12).toString(),
-    price: getRandomNumber(10, 100).toString(),
+    style: getRandomArrayValue(BEER_STYLE),
+    abv: getRandomNumber(3, 13).toString(),
+    price: getRandomNumber(5, 100).toString(),
     description: beer.description,
     tagline: beer.tagline,
     tips: beer.brewers_tips,

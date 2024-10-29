@@ -17,11 +17,31 @@ const breweries = [
 ];
 
 const LandingPage: React.FC = () => {
-  const { fetchBeers, beers, getSelected } = useStore(
+  const {
+    fetchBeers,
+    beers,
+    getSelected,
+    filterByPrice,
+    filterByAbv,
+    filterByStyle,
+    filterByBrand,
+    currentPrice,
+    currentAbv,
+    currentStyle,
+    currentBrand,
+  } = useStore(
     useShallow((state) => ({
       fetchBeers: state.fetchBeers,
-      beers: state.beers,
+      beers: state.displayBeers,
       getSelected: state.getSelected,
+      filterByPrice: state.filterByPrice,
+      filterByAbv: state.filterByAbv,
+      filterByStyle: state.filterByStyle,
+      filterByBrand: state.filterByBrand,
+      currentPrice: state.filterPrice,
+      currentAbv: state.filterAbv,
+      currentStyle: state.filterStyle,
+      currentBrand: state.filterBrand,
     }))
   );
 
@@ -44,20 +64,24 @@ const LandingPage: React.FC = () => {
 
   const handleStyleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedStyle(event.target.value);
+    console.log(event.target.value);
+    filterByStyle(event.target.value);
   };
 
   const handleBreweriesChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedBreweries(event.target.value);
+    filterByBrand(event.target.value);
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedPrice(Number(e.target.value));
+    filterByPrice(e.target.value);
   };
 
   const handleAbvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedAbv(Number(e.target.value));
+    filterByAbv(Number(e.target.value));
   };
 
   return (
@@ -69,7 +93,7 @@ const LandingPage: React.FC = () => {
         {/* Filter section */}
         <div className="relative flex flex-wrap gap-12 items-center px-12 pt-24">
           <select
-            value={selectedStyle}
+            value={currentStyle}
             onChange={handleStyleChange}
             className="p-2 rounded-full bg-white bg-opacity-50 text-gray-700 w-40 z-10"
           >
@@ -82,7 +106,7 @@ const LandingPage: React.FC = () => {
           </select>
 
           <select
-            value={selectedBreweries}
+            value={currentBrand}
             onChange={handleBreweriesChange}
             className="p-2 rounded-full bg-white bg-opacity-50 text-gray-700 w-40 z-10"
           >
@@ -96,7 +120,7 @@ const LandingPage: React.FC = () => {
 
           <div className="flex items-center z-10">
             <label htmlFor="price" className="text-white mr-2">
-              Max Price: ${selectedPrice}
+              Max Price: ${currentPrice}
             </label>
             <input
               id="price"
@@ -104,7 +128,7 @@ const LandingPage: React.FC = () => {
               min="10"
               max="100"
               step="1"
-              value={selectedPrice}
+              value={currentPrice}
               onChange={handlePriceChange}
               className="w-40"
             />
@@ -112,7 +136,7 @@ const LandingPage: React.FC = () => {
 
           <div className="flex items-center z-10">
             <label htmlFor="price" className="text-white mr-2">
-              Max ABV%: {selectedAbv}
+              Max ABV%: {currentAbv}
             </label>
             <input
               id="price"
@@ -120,7 +144,7 @@ const LandingPage: React.FC = () => {
               min="3"
               max="13"
               step="0.5"
-              value={selectedAbv}
+              value={currentAbv}
               onChange={handleAbvChange}
               className="w-40"
             />

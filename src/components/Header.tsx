@@ -11,7 +11,7 @@ const Header = () => {
       total: state.total,
     }))
   );
-  console.log(total);
+
   return (
     <div>
       <header className="fixed top-0 w-full flex justify-between items-center py-4 px-8 z-20">
