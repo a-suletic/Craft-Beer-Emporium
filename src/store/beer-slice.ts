@@ -10,12 +10,17 @@ const initBeers: BeerType[] = [INIT_BEER];
 type BeerState = {
   beers: BeerType[];
   selected: BeerType;
+  selectedForEdit: BeerType;
   displayBeers: BeerType[];
 };
 
 type BeerAction = {
   fetchBeers: () => Promise<BeerType[]>;
+  addBeer: (beer: BeerType) => void;
+  removeBeer: (beerId: string) => void;
+  updateBeer: (beer: BeerType) => void;
   getSelected: (selectedId: string) => BeerType | undefined;
+  setSelectedForEdit: (beer: BeerType) => void;
 };
 
 export type BeerSlice = BeerState & BeerAction;
@@ -29,6 +34,7 @@ export const createBeerSlice: StateCreator<
   beers: initBeers,
   displayBeers: initBeers,
   selected: INIT_BEER,
+  selectedForEdit: INIT_BEER,
   fetchBeers: async () => {
     const response = await axios.get(process.env.REACT_BEER_API!);
     const mappedBeers = mapBeerApiToBeer(response.data);
@@ -51,5 +57,32 @@ export const createBeerSlice: StateCreator<
       });
     }
     return selectedBeer;
+  },
+  setSelectedForEdit: (selectedBeer) => {
+    set((state) => {
+      state.selectedForEdit = selectedBeer;
+    });
+  },
+  addBeer: (beer) => {
+    set((state) => {
+      const beers = [...state.beers, beer];
+      return { beers: beers, displayBeers: beers };
+    });
+  },
+  updateBeer: (beer) => {
+    set((state) => ({
+      beers: state.beers.map((beerLoop) =>
+        beer.id === beerLoop.id ? beer : beerLoop
+      ),
+      displayBeers: state.displayBeers.map((beerLoop) =>
+        beer.id === beerLoop.id ? beer : beerLoop
+      ),
+    }));
+  },
+  removeBeer: (beerId) => {
+    set((state) => {
+      const beers = state.beers.filter((beer) => beer.id !== beerId);
+      return { beers: beers, displayBeers: beers };
+    });
   },
 });

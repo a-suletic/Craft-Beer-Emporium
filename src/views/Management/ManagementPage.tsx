@@ -1,26 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import BeerGraphs from './Graphs/beer-graph';
 import GenericTable from './BeerTable';
 import { BeerType } from '../../types/beer_type';
 import { COLUMNS_BEER } from '../../utils/constants';
 import { useStore } from '../../store/store';
+import AddBeerModal from './AddBeerModal';
+import { useShallow } from 'zustand/react/shallow';
 
 const columns = COLUMNS_BEER;
 
 function ManagementPage() {
-  const beers = useStore((state) => state.beers);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
-  const handleAddNew = (beer: BeerType) => {
-    console.log('Adding new item:', beer);
-  };
+  const { beers, addBeer, removeBeer, setSelectedForEdit, updateBeer } =
+    useStore(
+      useShallow((state) => ({
+        beers: state.displayBeers,
+        addBeer: state.addBeer,
+        removeBeer: state.removeBeer,
+        setSelectedForEdit: state.setSelectedForEdit,
+        updateBeer: state.updateBeer,
+      }))
+    );
 
   const handleEdit = (beer: BeerType) => {
-    console.log('Editing item:', beer);
+    setIsEdit(true);
+    setSelectedForEdit(beer);
+    setIsModalOpen(true);
   };
 
   const handleDelete = (beer: BeerType) => {
-    console.log('Deleting item:', beer);
+    removeBeer(beer.id);
+  };
+
+  const handleAddBeer = (newBeer: BeerType) => {
+    isEdit ? updateBeer(newBeer) : addBeer(newBeer);
+    setIsEdit(false);
+  };
+
+  const onClose = () => {
+    setIsModalOpen(false);
+    setIsEdit(false);
   };
 
   return (
@@ -30,7 +52,10 @@ function ManagementPage() {
         <h1 className="text-2xl font-bold p-4">Top 10 Beer Sales</h1>
         <BeerGraphs />
         <div className="w-40 px-4 pt-4">
-          <button className="bg-orange-400 text-white py-3 lg:px-4 rounded-md">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-orange-400 text-white py-3 lg:px-4 rounded-md"
+          >
             New Beer
           </button>
         </div>
@@ -40,6 +65,13 @@ function ManagementPage() {
           data={beers}
           onEdit={handleEdit}
           onDelete={handleDelete}
+        />
+
+        <AddBeerModal
+          isOpen={isModalOpen}
+          onClose={onClose}
+          onAdd={handleAddBeer}
+          isEdit={isEdit}
         />
       </div>
     </div>
