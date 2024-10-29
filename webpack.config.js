@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/index.tsx',
@@ -37,16 +38,16 @@ module.exports = {
   devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      // inject the bundle.js file into the index.html file and place that html file in the dist folder
       template: './public/index.html',
       favicon: './public/favicon.ico',
     }),
+    new Dotenv(),
   ].filter(Boolean),
   devServer: {
     static: path.join(__dirname, 'dist'),
     compress: true,
     historyApiFallback: true,
     port: 3000,
-    hot: true, // Enables Hot Module Replacement in development
+    hot: true,
   },
 };

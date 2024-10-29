@@ -1,33 +1,14 @@
 import { StateCreator } from 'zustand';
 import { StoreType } from '../types/store_type';
 import { BeerType } from '../types/beer_type';
-import { filterByAbvandOrice } from '../services/store-service';
-import { BREWARIES, BEER_STYLE } from '../utils/constants';
+import { filterBeers } from '../services/store-service';
+import { INIT_BEER, MAX_ABV, MAX_PRICE } from '../utils/constants';
 
-const initBeer: BeerType = {
-  id: '',
-  name: '',
-  brand: '',
-  image: '',
-  style: '',
-  abv: '',
-  price: '',
-  description: '',
-  tagline: '',
-  tips: '',
-  attenuation: '',
-};
-
-const MAX_PRICE = 100;
-const MAX_ABV = 13;
-
-const initBeers: BeerType[] = [initBeer];
+const initBeers: BeerType[] = [INIT_BEER];
 
 type FilterState = {
   beers: BeerType[];
   displayBeers: BeerType[];
-  // sortByBrand: boolean;
-  // sortByStyle: boolean;
   filterPrice: number;
   filterAbv: number;
   filterStyle: string;
@@ -56,15 +37,7 @@ export const createFilterSlice: StateCreator<
   filterStyle: '',
   filterBrand: '',
   filterByPrice: (maxPrice) => {
-    // if (Number(maxPrice) <= MAX_PRICE) {
-    //   set((state) => {
-    //     state.filterPrice = Number(maxPrice);
-    //   });
-    // }
-    set((state) => {
-      state.filterPrice = Number(maxPrice);
-    });
-    const filterByPrice = filterByAbvandOrice(
+    const filterByPrice = filterBeers(
       get().beers,
       get().filterAbv,
       Number(maxPrice),
@@ -73,21 +46,12 @@ export const createFilterSlice: StateCreator<
     );
     set((state) => {
       state.displayBeers = filterByPrice;
+      state.filterPrice = Number(maxPrice);
     });
-    console.log('filetrByPrice');
-    console.log(filterByPrice);
     return filterByPrice;
   },
   filterByAbv: (maxAbv) => {
-    // if (Number(maxAbv) <= MAX_ABV) {
-    //   set((state) => {
-    //     state.filterAbv = Number(maxAbv);
-    //   });
-    // }
-    set((state) => {
-      state.filterAbv = Number(maxAbv);
-    });
-    const filterByAbv = filterByAbvandOrice(
+    const filterByAbv = filterBeers(
       get().beers,
       Number(maxAbv),
       get().filterPrice,
@@ -96,20 +60,12 @@ export const createFilterSlice: StateCreator<
     );
     set((state) => {
       state.displayBeers = filterByAbv;
+      state.filterAbv = Number(maxAbv);
     });
-    console.log(filterByAbv);
     return filterByAbv;
   },
   filterByStyle: (style) => {
-    // if (style !== '') {
-    //   set((state) => {
-    //     state.filterStyle = style;
-    //   });
-    // }
-    set((state) => {
-      state.filterStyle = style;
-    });
-    const filterByStyle = filterByAbvandOrice(
+    const filterByStyle = filterBeers(
       get().beers,
       get().filterAbv,
       get().filterPrice,
@@ -118,20 +74,12 @@ export const createFilterSlice: StateCreator<
     );
     set((state) => {
       state.displayBeers = filterByStyle;
+      state.filterStyle = style;
     });
-    console.log(filterByStyle);
     return filterByStyle;
   },
   filterByBrand: (brand) => {
-    // if (brand !== '') {
-    //   set((state) => {
-    //     state.filterBrand = brand;
-    //   });
-    // }
-    set((state) => {
-      state.filterBrand = brand;
-    });
-    const filterByStyle = filterByAbvandOrice(
+    const filterByStyle = filterBeers(
       get().beers,
       get().filterAbv,
       get().filterPrice,
@@ -140,8 +88,8 @@ export const createFilterSlice: StateCreator<
     );
     set((state) => {
       state.displayBeers = filterByStyle;
+      state.filterBrand = brand;
     });
-    console.log(filterByStyle);
     return filterByStyle;
   },
 });

@@ -7,6 +7,7 @@ import { createUserSlice } from './user-slice';
 import { createCartSlice } from './cart-slice';
 import { createBeerSlice } from './beer-slice';
 import { createFilterSlice } from './filter-slice';
+import { STORAGE_NAME } from '../utils/constants';
 
 export const useStore = create<StoreType>()(
   devtools(
@@ -18,7 +19,7 @@ export const useStore = create<StoreType>()(
         ...createFilterSlice(...a),
       })),
       {
-        name: 'beer-storage',
+        name: STORAGE_NAME,
       }
     )
   )

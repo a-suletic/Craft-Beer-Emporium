@@ -6,9 +6,10 @@ import { useStore } from '../store/store';
 import { useShallow } from 'zustand/react/shallow';
 
 const Header = () => {
-  const { total } = useStore(
+  const { total, reset } = useStore(
     useShallow((state) => ({
       total: state.total,
+      reset: state.reset,
     }))
   );
 
@@ -28,8 +29,8 @@ const Header = () => {
             <Link to="management">Management Page</Link>
           </a>
         </nav>
-        <div className="relative">
-          <FiShoppingCart className="text-white text-2xl" />
+        <div onClick={() => reset()} className="relative cursor-pointer">
+          <FiShoppingCart className="text-white text-2xl " />
           {total > 0 && (
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
               {total}

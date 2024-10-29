@@ -3,25 +3,9 @@ import { StoreType } from '../types/store_type';
 import { BeerType } from '../types/beer_type';
 import axios from 'axios';
 import { mapBeerApiToBeer } from '../utils/beer_api.utils';
+import { INIT_BEER, MAX_ABV, MAX_PRICE } from '../utils/constants';
 
-const initBeer: BeerType = {
-  id: '',
-  name: '',
-  brand: '',
-  image: '',
-  style: '',
-  abv: '',
-  price: '',
-  description: '',
-  tagline: '',
-  tips: '',
-  attenuation: '',
-};
-
-const MAX_PRICE = 100;
-const MAX_ABV = 13;
-
-const initBeers: BeerType[] = [initBeer];
+const initBeers: BeerType[] = [INIT_BEER];
 
 type BeerState = {
   beers: BeerType[];
@@ -44,17 +28,17 @@ export const createBeerSlice: StateCreator<
 > = (set, get) => ({
   beers: initBeers,
   displayBeers: initBeers,
-  selected: initBeer,
+  selected: INIT_BEER,
   fetchBeers: async () => {
-    const response = await axios.get(
-      'https://ih-beers-api2.herokuapp.com/beers'
-    );
+    const response = await axios.get(process.env.REACT_BEER_API!);
     const mappedBeers = mapBeerApiToBeer(response.data);
     set((state) => {
       state.beers = mappedBeers;
       state.displayBeers = mappedBeers;
       state.filterAbv = MAX_ABV;
       state.filterPrice = MAX_PRICE;
+      state.filterBrand = '';
+      state.filterStyle = '';
     });
 
     return mappedBeers;

@@ -1,6 +1,6 @@
 import { BeerType } from '../types/beer_type';
 
-export const filterByAbvandOrice = (
+export const filterBeers = (
   beers: BeerType[],
   maxAbv: number,
   maxPrice: number,
