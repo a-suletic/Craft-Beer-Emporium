@@ -23,5 +23,6 @@ export const mapBeerApiToBeer = (apiData: BeerApiType[]): BeerType[] => {
     tagline: beer.tagline,
     tips: beer.brewers_tips,
     attenuation: beer.attenuation_level,
+    rating: getRandomNumber(1, 5).toString(),
   }));
 };

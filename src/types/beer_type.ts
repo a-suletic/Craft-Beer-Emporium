@@ -27,4 +27,5 @@ export type BeerType = {
   tagline: string;
   tips: string;
   attenuation: string;
+  rating: string;
 };
