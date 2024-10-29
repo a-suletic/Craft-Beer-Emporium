@@ -1,6 +1,6 @@
 import React from 'react';
-import { FiShoppingCart } from 'react-icons/fi';
-import LogoImage from '../images/logo.jpg';
+import { FiShoppingCart, FiUser } from 'react-icons/fi';
+import LogoImage from '../images/logo.png';
 import { Link } from 'react-router-dom';
 import { useStore } from '../store/store';
 import { useShallow } from 'zustand/react/shallow';
@@ -14,31 +14,35 @@ const Header = () => {
   );
 
   return (
-    <div>
-      <header className="fixed top-0 w-full flex justify-between items-center py-4 px-8 z-20">
-        <div className="text-white text-lg font-bold">
-          <Link to="/">
-            <img src={LogoImage} alt="LOGO" width={70} height={70} />
+    <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-[#19100f] via-[#38241a] to-[#221615] text-white p-4 z-50 shadow-lg">
+      <div className="flex items-center justify-between px-2">
+        {/* Logo */}
+        <Link to="/" className="text-2xl font-bold ml-2">
+          <img src={LogoImage} alt="LOGO" width={50} height={50} />
+        </Link>
+
+        {/* Icons */}
+        <div className="flex items-center space-x-4 mr-2">
+          <Link to="/management">
+            <FiUser
+              size={24}
+              className="hover:text-orange-400 transition duration-200"
+            />
           </Link>
+          <div onClick={() => reset()}>
+            <FiShoppingCart
+              size={24}
+              className="hover:text-orange-400 transition duration-200 cursor-pointer"
+            />
+            {total > 0 && (
+              <span className="absolute top-2 right-7 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {total}
+              </span>
+            )}
+          </div>
         </div>
-        <nav>
-          <a
-            href="/management"
-            className="text-white text-lg font-semibold hover:text-gray-300 transition-colors"
-          >
-            <Link to="management">Management Page</Link>
-          </a>
-        </nav>
-        <div onClick={() => reset()} className="relative cursor-pointer">
-          <FiShoppingCart className="text-white text-2xl " />
-          {total > 0 && (
-            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-              {total}
-            </span>
-          )}
-        </div>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 };
 

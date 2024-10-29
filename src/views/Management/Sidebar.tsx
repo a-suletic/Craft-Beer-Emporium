@@ -38,7 +38,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`h-screen bg-orange-400 text-gray-100 flex flex-col ${isCollapsed ? 'w-20' : 'w-64'} transition-all duration-300 pt-24`}
+      className={`h-screen bg-orange-400 text-gray-100 flex flex-col ${isCollapsed ? 'w-20' : 'w-64'} transition-all duration-300`}
     >
       <div className="flex items-center justify-between h-20 bg-gray-800 border-b border-gray-700 p-4">
         {!isCollapsed && (
@@ -48,7 +48,7 @@ const Sidebar = () => {
         )}
         <button
           onClick={colapse}
-          className="text-gray-100 focus:outline-none mt-32 cursor-pointer z-40"
+          className="text-gray-100 focus:outline-none cursor-pointer z-40"
         >
           {isCollapsed ? (
             <AiOutlineMenu size={24} />

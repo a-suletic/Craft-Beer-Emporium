@@ -1,21 +1,34 @@
 import React from 'react';
 import LandingPage from './views/LandingPage';
 import Header from './components/Header';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import DetailsPage from './views/DetailsPage';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
+import DetailsPage from './views/Details/DetailsPage';
 import ManagementPage from './views/Management/ManagementPage';
 
 const App: React.FC = () => {
+  const location = useLocation();
+
   return (
-    <Router>
-      <Header />
+    <div>
+      {location.pathname !== '/management' && <Header />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/details" element={<DetailsPage />} />
         <Route path="/management" element={<ManagementPage />} />
       </Routes>
-    </Router>
+    </div>
   );
 };
 
-export default App;
+const RootApp = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default RootApp;
