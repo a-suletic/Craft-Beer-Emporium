@@ -94,7 +94,7 @@ function DetailsPage() {
             onClick={addItem}
             className="bg-orange-400 text-white font-semibold py-3 px-10 lg:px-16 rounded-xl"
           >
-            Add to Cart
+            Buy
           </button>
         </div>
       </div>

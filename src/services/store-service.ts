@@ -1,6 +1,6 @@
 import { BeerType } from '../types/beer_type';
 
-const sortBeersByName = (
+export const sortBeersByName = (
   beers: BeerType[],
   order: string | undefined
 ): BeerType[] => {
@@ -26,8 +26,8 @@ export const filterBeers = (
 ) => {
   const result = beers.filter((beer) => {
     return (
-      parseInt(beer.price) < maxPrice &&
-      parseInt(beer.abv) < maxAbv &&
+      parseInt(beer.price) <= maxPrice &&
+      parseInt(beer.abv) <= maxAbv &&
       (style !== '' ? beer.style === style : beer) &&
       (brand !== '' ? beer.brand === brand : beer)
     );

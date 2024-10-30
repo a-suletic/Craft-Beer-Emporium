@@ -15,6 +15,10 @@ npm start
 - enter dist folder
 - npx serve
 
+# run tests
+
+npm test
+
 ### NOTES
 
 In order to fullfill the project requirements, I have extanded API model with required properties like AVB, Price , Style and Type.
