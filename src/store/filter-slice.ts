@@ -4,11 +4,7 @@ import { BeerType } from '../types/beer_type';
 import { filterBeers } from '../services/store-service';
 import { INIT_BEER, MAX_ABV, MAX_PRICE } from '../utils/constants';
 
-const initBeers: BeerType[] = [INIT_BEER];
-
 type FilterState = {
-  beers: BeerType[];
-  displayBeers: BeerType[];
   filterPrice: number;
   filterAbv: number;
   filterStyle: string;
@@ -32,8 +28,6 @@ export const createFilterSlice: StateCreator<
   [],
   FilterSlice
 > = (set, get) => ({
-  beers: initBeers,
-  displayBeers: initBeers,
   filterPrice: MAX_PRICE,
   filterAbv: MAX_ABV,
   filterStyle: '',

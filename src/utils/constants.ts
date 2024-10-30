@@ -1,6 +1,7 @@
 import { BeerType } from '../types/beer_type';
 import { Column } from '../types/table_type';
 
+// Graphs
 export const BEER_STYLE = ['IPA', 'Stout', 'Lager', 'Pilsner', 'Ale', 'Porter'];
 export const BREWARIES = [
   'BrewDog',
@@ -11,8 +12,8 @@ export const BREWARIES = [
   'Dogfish Head',
 ];
 
+// Filters
 export const ORDER_BY = ['A to Z', 'Z to A'];
-
 export const INIT_BEER: BeerType = {
   id: '',
   name: '',
@@ -27,12 +28,13 @@ export const INIT_BEER: BeerType = {
   attenuation: '',
   rating: '',
 };
-
 export const MAX_PRICE = 100;
 export const MAX_ABV = 13;
 
+// Common constants
 export const STORAGE_NAME = 'beer_storage';
 
+// Table
 export const COLUMNS_BEER: Column[] = [
   { Header: 'Name', accessor: 'name' },
   { Header: 'Brand', accessor: 'brand' },
