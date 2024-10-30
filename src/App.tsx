@@ -1,6 +1,6 @@
 import React from 'react';
 import LandingPage from './views/Landing/LandingPage';
-import Header from './components/Header';
+import Header from '../src/components/Header/Header';
 import {
   BrowserRouter as Router,
   Routes,

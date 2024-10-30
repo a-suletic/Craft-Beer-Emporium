@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiHome, FiSettings, FiShoppingCart } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { useStore } from '../store/store';
+import { useStore } from '../../store/store';
 import { useShallow } from 'zustand/react/shallow';
 
 function Navigation() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from '../../components/Slider';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 import FilterByStyle from './Filters/FilterByStyle';
 import FilterByBrewaries from './Filters/FilterByBrewaries';
 import OrderByName from './Filters/OrderByName';

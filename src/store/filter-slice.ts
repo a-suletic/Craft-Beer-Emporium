@@ -2,7 +2,7 @@ import { StateCreator } from 'zustand';
 import { StoreType } from '../types/store_type';
 import { BeerType } from '../types/beer_type';
 import { filterBeers } from '../services/store-service';
-import { INIT_BEER, MAX_ABV, MAX_PRICE } from '../utils/constants';
+import { MAX_ABV, MAX_PRICE } from '../utils/constants';
 
 type FilterState = {
   filterPrice: number;
