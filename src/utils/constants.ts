@@ -12,6 +12,10 @@ export const BREWARIES = [
   'Dogfish Head',
 ];
 
+// Links
+export const MANAGEMENT_PAGE = '/management';
+export const DETAILS_PAGE = '/details';
+
 // Filters
 export const ORDER_BY = ['A to Z', 'Z to A'];
 export const INIT_BEER: BeerType = {

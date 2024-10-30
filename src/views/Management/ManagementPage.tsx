@@ -6,7 +6,7 @@ import { COLUMNS_BEER } from '../../utils/constants';
 import { useStore } from '../../store/store';
 import AddBeerModal from './Components/BeerModal';
 import { useShallow } from 'zustand/react/shallow';
-import { CommonTable } from '../../utils/common-table';
+import { CommonTable } from '../../components/Table/common-table';
 import Button from '../../components/Button';
 
 function ManagementPage() {

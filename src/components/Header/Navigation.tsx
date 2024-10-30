@@ -3,6 +3,7 @@ import { FiHome, FiSettings, FiShoppingCart } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useStore } from '../../store/store';
 import { useShallow } from 'zustand/react/shallow';
+import { MANAGEMENT_PAGE } from '../../utils/constants';
 
 function Navigation() {
   const { total, reset } = useStore(
@@ -20,7 +21,7 @@ function Navigation() {
           className="hover:text-orange-400 transition duration-200"
         />
       </Link>
-      <Link to="/management">
+      <Link to={MANAGEMENT_PAGE}>
         <FiSettings
           size={24}
           className="hover:text-orange-400 transition duration-200"

@@ -9,17 +9,18 @@ import {
 } from 'react-router-dom';
 import DetailsPage from './views/Details/DetailsPage';
 import ManagementPage from './views/Management/ManagementPage';
+import { DETAILS_PAGE, MANAGEMENT_PAGE } from './utils/constants';
 
 const App: React.FC = () => {
   const location = useLocation();
 
   return (
     <div>
-      {location.pathname !== '/management' && <Header />}
+      {location.pathname !== MANAGEMENT_PAGE && <Header />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/details" element={<DetailsPage />} />
-        <Route path="/management" element={<ManagementPage />} />
+        <Route path={DETAILS_PAGE} element={<DetailsPage />} />
+        <Route path={MANAGEMENT_PAGE} element={<ManagementPage />} />
       </Routes>
     </div>
   );

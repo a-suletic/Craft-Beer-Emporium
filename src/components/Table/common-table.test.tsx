@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { CommonTable } from './common-table';
-import { BeerType } from '../types/beer_type';
-import { COLUMNS_BEER } from './constants';
+import { CommonTable } from '../../components/Table/common-table';
+import { BeerType } from '../../types/beer_type';
+import { COLUMNS_BEER } from '../../utils/constants';
 
 const MOCK_BEERS: BeerType[] = [
   {
