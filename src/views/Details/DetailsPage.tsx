@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import IMAGE_BKG from '../../images/beer_image_1.jpg';
+import IMAGE_BKG from '../../images/beer_image_2.jpg';
 import { useStore } from '../../store/store';
 import RatingBar from './Rating';
 
@@ -22,14 +22,16 @@ function DetailsPage() {
         backgroundPosition: 'center',
       }}
     >
+      {/* beer image */}
       <div className="w-full lg:w-1/2 flex justify-center">
         <img
           src={selectedBeer?.image}
           alt="Beer Image"
-          className="w-full h-auto max-w-lg object-cover rounded-xl shadow-lg"
+          className="w-[120%] h-auto max-w-lg object-cover rounded-xl shadow-lg"
         />
       </div>
 
+      {/* beer details */}
       <div className="w-full lg:w-1/2 flex flex-col gap-4 p-4 lg:p-8 bg-white bg-opacity-70 rounded-lg">
         <div>
           <span className="text-orange-400 font-semibold">
@@ -38,7 +40,8 @@ function DetailsPage() {
           <h1 className="text-2xl md:text-3xl font-bold mt-1">
             {selectedBeer?.name}
           </h1>
-          <p className="text-sm md:text-sm font-semibold">
+          <p className="text-sm md:text-base font-semibold">
+            {' '}
             {selectedBeer?.tagline}
           </p>
         </div>
@@ -47,21 +50,21 @@ function DetailsPage() {
 
         <p className="text-gray-700">{selectedBeer?.description}</p>
 
-        <p className="text-sm md:text-sm font-semibold">
+        <p className="text-sm md:text-base font-semibold">
           Tips: <br /> {selectedBeer?.tips}
         </p>
-        <p className="text-xl md:text-sm font-semibold">
+        <p className="text-xl md:text-lg font-semibold">
           Attenuation:{' '}
-          <span className="text-xl md:text-sm italic">
+          <span className="text-xl md:text-lg italic">
             {selectedBeer?.attenuation}
           </span>
         </p>
-        <p className="text-xl md:text-sm font-semibold">
+        <p className="text-xl md:text-lg font-semibold">
           Style:{' '}
-          <span className="text-xl md:text-sm ">{selectedBeer?.style}</span>
+          <span className="text-xl md:text-lg ">{selectedBeer?.style}</span>
         </p>
-        <p className="text-xl md:text-sm font-semibold">
-          ABV: <span className="text-xl md:text-sm ">{selectedBeer?.abv}</span>
+        <p className="text-xl md:text-lg font-semibold">
+          ABV: <span className="text-xl md:text-lg ">{selectedBeer?.abv}</span>
         </p>
         <p className="text-xl md:text-xl font-semibold">
           Price:{' '}

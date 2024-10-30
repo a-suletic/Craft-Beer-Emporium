@@ -13,6 +13,7 @@ type FilterState = {
   filterAbv: number;
   filterStyle: string;
   filterBrand: string;
+  filterOrder: string | undefined;
 };
 
 type FilterActions = {
@@ -20,6 +21,7 @@ type FilterActions = {
   filterByAbv: (maxAbv: number) => BeerType[];
   filterByStyle: (style: string) => BeerType[];
   filterByBrand: (brand: string) => BeerType[];
+  sortOrder: (order: string | undefined) => void;
 };
 
 export type FilterSlice = FilterState & FilterActions;
@@ -36,13 +38,15 @@ export const createFilterSlice: StateCreator<
   filterAbv: MAX_ABV,
   filterStyle: '',
   filterBrand: '',
+  filterOrder: 'asc',
   filterByPrice: (maxPrice) => {
     const filterByPrice = filterBeers(
       get().beers,
       get().filterAbv,
       Number(maxPrice),
       get().filterStyle,
-      get().filterBrand
+      get().filterBrand,
+      get().filterOrder
     );
     set((state) => {
       state.displayBeers = filterByPrice;
@@ -56,7 +60,8 @@ export const createFilterSlice: StateCreator<
       Number(maxAbv),
       get().filterPrice,
       get().filterStyle,
-      get().filterBrand
+      get().filterBrand,
+      get().filterOrder
     );
     set((state) => {
       state.displayBeers = filterByAbv;
@@ -70,7 +75,8 @@ export const createFilterSlice: StateCreator<
       get().filterAbv,
       get().filterPrice,
       style,
-      get().filterBrand
+      get().filterBrand,
+      get().filterOrder
     );
     set((state) => {
       state.displayBeers = filterByStyle;
@@ -84,12 +90,28 @@ export const createFilterSlice: StateCreator<
       get().filterAbv,
       get().filterPrice,
       get().filterStyle,
-      brand
+      brand,
+      get().filterOrder
     );
     set((state) => {
       state.displayBeers = filterByStyle;
       state.filterBrand = brand;
     });
     return filterByStyle;
+  },
+  sortOrder: (order) => {
+    const orderedBeers = filterBeers(
+      get().beers,
+      get().filterAbv,
+      get().filterPrice,
+      get().filterStyle,
+      get().filterBrand,
+      order
+    );
+    set((state) => {
+      state.displayBeers = orderedBeers;
+      state.filterOrder = order;
+    });
+    return orderedBeers;
   },
 });

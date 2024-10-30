@@ -49,7 +49,7 @@ function ManagementPage() {
     <div className="flex h-screen">
       <Sidebar />
       <div className="flex-1 bg-gray-100 overflow-y-auto">
-        <h1 className="text-2xl font-bold px-5 pt-6 pb-2">Top 10 Beer Sales</h1>
+        {/* <h1 className="text-2xl font-bold px-5 pt-6 pb-2">Top 10 Beer Sales</h1> */}
         <BeerGraphs />
         <div className="w-40 px-4 pt-4">
           <button

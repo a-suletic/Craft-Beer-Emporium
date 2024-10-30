@@ -1,11 +1,28 @@
 import { BeerType } from '../types/beer_type';
 
+const sortBeersByName = (
+  beers: BeerType[],
+  order: string | undefined
+): BeerType[] => {
+  return [...beers].sort((a, b) => {
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
+
+    if (order === 'asc') {
+      return nameA.localeCompare(nameB);
+    } else {
+      return nameB.localeCompare(nameA);
+    }
+  });
+};
+
 export const filterBeers = (
   beers: BeerType[],
   maxAbv: number,
   maxPrice: number,
   style: string,
-  brand: string
+  brand: string,
+  order: string | undefined
 ) => {
   const result = beers.filter((beer) => {
     return (
@@ -15,5 +32,6 @@ export const filterBeers = (
       (brand !== '' ? beer.brand === brand : beer)
     );
   });
-  return result;
+  const sortedBeers = sortBeersByName(result, order);
+  return sortedBeers;
 };

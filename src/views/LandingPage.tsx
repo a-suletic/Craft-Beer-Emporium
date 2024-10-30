@@ -15,6 +15,7 @@ const breweries = [
   'Founders',
   'Dogfish Head',
 ];
+const orderby = ['A to Z', 'Z to A'];
 
 const LandingPage: React.FC = () => {
   const {
@@ -25,10 +26,12 @@ const LandingPage: React.FC = () => {
     filterByAbv,
     filterByStyle,
     filterByBrand,
+    sortOrder,
     currentPrice,
     currentAbv,
     currentStyle,
     currentBrand,
+    currentOrder,
   } = useStore(
     useShallow((state) => ({
       fetchBeers: state.fetchBeers,
@@ -38,17 +41,19 @@ const LandingPage: React.FC = () => {
       filterByAbv: state.filterByAbv,
       filterByStyle: state.filterByStyle,
       filterByBrand: state.filterByBrand,
+      sortOrder: state.sortOrder,
       currentPrice: state.filterPrice,
       currentAbv: state.filterAbv,
       currentStyle: state.filterStyle,
       currentBrand: state.filterBrand,
+      currentOrder: state.filterOrder,
     }))
   );
 
-  const [selectedStyle, setSelectedStyle] = useState<string>('');
-  const [selectedBreweries, setSelectedBreweries] = useState<string>('');
-  const [selectedPrice, setSelectedPrice] = useState<number>(100);
-  const [selectedAbv, setSelectedAbv] = useState<number>(12);
+  // const [selectedStyle, setSelectedStyle] = useState<string>('');
+  // const [selectedBreweries, setSelectedBreweries] = useState<string>('');
+  // const [selectedPrice, setSelectedPrice] = useState<number>(100);
+  // const [selectedAbv, setSelectedAbv] = useState<number>(12);
 
   const getBeers = async () => {
     await fetchBeers();
@@ -63,7 +68,7 @@ const LandingPage: React.FC = () => {
   };
 
   const handleStyleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedStyle(event.target.value);
+    //setSelectedStyle(event.target.value);
     console.log(event.target.value);
     filterByStyle(event.target.value);
   };
@@ -75,13 +80,21 @@ const LandingPage: React.FC = () => {
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedPrice(Number(e.target.value));
+    //setSelectedPrice(Number(e.target.value));
     filterByPrice(e.target.value);
   };
 
   const handleAbvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedAbv(Number(e.target.value));
+    //setSelectedAbv(Number(e.target.value));
     filterByAbv(Number(e.target.value));
+  };
+
+  const handleOrderBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    let orderBy = 'asc';
+    if (e.target.value === 'Z to A') {
+      orderBy = 'desc';
+    }
+    sortOrder(orderBy);
   };
 
   return (
@@ -114,6 +127,19 @@ const LandingPage: React.FC = () => {
             {breweries.map((brewer) => (
               <option key={brewer} value={brewer}>
                 {brewer}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={currentOrder === 'asc' ? 'A to Z' : 'Z to A'}
+            onChange={handleOrderBy}
+            className="p-2 rounded-full bg-white bg-opacity-50 text-gray-700 w-40 z-10"
+          >
+            <option value="">Order By</option>
+            {orderby.map((order) => (
+              <option key={order} value={order}>
+                {order}
               </option>
             ))}
           </select>
