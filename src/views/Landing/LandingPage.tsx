@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Slider from '../components/Slider';
-import Header from '../components/Header';
-import IMAGE3 from '../images/beer_image_3.jpg';
+import React, { useEffect } from 'react';
+import Slider from '../../components/Slider';
+import Header from '../../components/Header';
+import IMAGE3 from '../../images/beer_image_3.jpg';
 import { Link } from 'react-router-dom';
-import { useStore } from '../store/store';
+import { useStore } from '../../store/store';
 import { useShallow } from 'zustand/react/shallow';
-
-const beerStyles = ['IPA', 'Stout', 'Lager', 'Pilsner', 'Ale', 'Porter'];
-const breweries = [
-  'BrewDog',
-  'Stone Brewing',
-  'Sierra Nevada',
-  'Lagunitas',
-  'Founders',
-  'Dogfish Head',
-];
-const orderby = ['A to Z', 'Z to A'];
+import { BEER_STYLE, BREWARIES, ORDER_BY } from '../../utils/constants';
+import Button from '../../components/Button';
 
 const LandingPage: React.FC = () => {
   const {
@@ -32,6 +23,7 @@ const LandingPage: React.FC = () => {
     currentStyle,
     currentBrand,
     currentOrder,
+    setTotal,
   } = useStore(
     useShallow((state) => ({
       fetchBeers: state.fetchBeers,
@@ -47,13 +39,9 @@ const LandingPage: React.FC = () => {
       currentStyle: state.filterStyle,
       currentBrand: state.filterBrand,
       currentOrder: state.filterOrder,
+      setTotal: state.setTotal,
     }))
   );
-
-  // const [selectedStyle, setSelectedStyle] = useState<string>('');
-  // const [selectedBreweries, setSelectedBreweries] = useState<string>('');
-  // const [selectedPrice, setSelectedPrice] = useState<number>(100);
-  // const [selectedAbv, setSelectedAbv] = useState<number>(12);
 
   const getBeers = async () => {
     await fetchBeers();
@@ -68,7 +56,6 @@ const LandingPage: React.FC = () => {
   };
 
   const handleStyleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    //setSelectedStyle(event.target.value);
     console.log(event.target.value);
     filterByStyle(event.target.value);
   };
@@ -80,12 +67,10 @@ const LandingPage: React.FC = () => {
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //setSelectedPrice(Number(e.target.value));
     filterByPrice(e.target.value);
   };
 
   const handleAbvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //setSelectedAbv(Number(e.target.value));
     filterByAbv(Number(e.target.value));
   };
 
@@ -111,7 +96,7 @@ const LandingPage: React.FC = () => {
             className="p-2 rounded-full bg-white bg-opacity-50 text-gray-700 w-40 z-10"
           >
             <option value="">All Styles</option>
-            {beerStyles.map((style) => (
+            {BEER_STYLE.map((style) => (
               <option key={style} value={style}>
                 {style}
               </option>
@@ -124,7 +109,7 @@ const LandingPage: React.FC = () => {
             className="p-2 rounded-full bg-white bg-opacity-50 text-gray-700 w-40 z-10"
           >
             <option value="">All Breweries</option>
-            {breweries.map((brewer) => (
+            {BREWARIES.map((brewer) => (
               <option key={brewer} value={brewer}>
                 {brewer}
               </option>
@@ -137,13 +122,12 @@ const LandingPage: React.FC = () => {
             className="p-2 rounded-full bg-white bg-opacity-50 text-gray-700 w-40 z-10"
           >
             <option value="">Order By</option>
-            {orderby.map((order) => (
+            {ORDER_BY.map((order) => (
               <option key={order} value={order}>
                 {order}
               </option>
             ))}
           </select>
-
           <div className="flex items-center z-10">
             <label htmlFor="price" className="text-white mr-2">
               Max Price: ${currentPrice}
@@ -193,17 +177,26 @@ const LandingPage: React.FC = () => {
                   <img
                     src={item.image ? item.image : IMAGE3}
                     alt="beer image"
-                    className="object-cover rounded transition-transform duration-300 ease-in-out transform hover:scale-110 mx-auto "
+                    className="object-cover rounded transition-transform duration-300 ease-in-out transform hover:scale-110 mx-auto"
                   />
                 </div>
-                <p className="text-white text-left text-sm w-full">
+                <p className="text-white text-left text-xl w-full">
                   {item.name}
                 </p>
-
-                <p className=" bottom-4 text-right text-orange-200 text-sm font-semibold">
-                  {item.price}$
-                </p>
               </Link>
+
+              <div className="flex justify-between items-center w-full mt-auto pt-4">
+                <Button
+                  onClick={() => setTotal(1)}
+                  variant="primary"
+                  size="small"
+                >
+                  Buy
+                </Button>
+                <div className="text-orange-200 text-xl font-semibold">
+                  {item.price}$
+                </div>
+              </div>
             </div>
           ))}
         </div>

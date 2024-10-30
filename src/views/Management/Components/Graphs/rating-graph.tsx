@@ -1,6 +1,6 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
-import useBeerDataRation from '../hooks/useBeerDataRating';
+import useBeerDataRation from '../../hooks/useBeerDataRating';
 
 function RatingChart() {
   const { top10BeerRatings } = useBeerDataRation();

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import IMAGE_BKG from '../../images/beer_image_2.jpg';
 import { useStore } from '../../store/store';
 import RatingBar from './Rating';
+import Button from '../../components/Button';
 
 function DetailsPage() {
   const setTotal = useStore((state) => state.setTotal);
@@ -90,12 +91,9 @@ function DetailsPage() {
             </button>
           </div>
 
-          <button
-            onClick={addItem}
-            className="bg-orange-400 text-white font-semibold py-3 px-10 lg:px-16 rounded-xl"
-          >
+          <Button onClick={addItem} variant="primary" size="medium">
             Buy
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
-import useTop10BeerSalesData from '../hooks/useBeerDataSales';
+import useTop10BeerSalesData from '../../hooks/useBeerDataSales';
 
 const SalesGrowth = () => {
   const { top10BeerSalesData } = useTop10BeerSalesData();

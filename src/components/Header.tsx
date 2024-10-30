@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiShoppingCart, FiUser } from 'react-icons/fi';
+import { FiHome, FiSettings, FiShoppingCart } from 'react-icons/fi';
 import LogoImage from '../images/logo.png';
 import { Link } from 'react-router-dom';
 import { useStore } from '../store/store';
@@ -14,7 +14,7 @@ const Header = () => {
   );
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-[#19100f] via-[#38241a] to-[#221615] text-white p-4 z-50 shadow-lg">
+    <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-[#261917] via-[#56392a] to-[#4b2e2b] text-white p-4 z-50 shadow-lg">
       <div className="flex items-center justify-between px-2">
         {/* Logo */}
         <Link to="/" className="text-2xl font-bold ml-2">
@@ -23,8 +23,14 @@ const Header = () => {
 
         {/* Icons */}
         <div className="flex items-center space-x-4 mr-2">
+          <Link to="/">
+            <FiHome
+              size={24}
+              className="hover:text-orange-400 transition duration-200"
+            />
+          </Link>
           <Link to="/management">
-            <FiUser
+            <FiSettings
               size={24}
               className="hover:text-orange-400 transition duration-200"
             />

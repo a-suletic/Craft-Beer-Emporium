@@ -1,5 +1,5 @@
 import React from 'react';
-import LandingPage from './views/LandingPage';
+import LandingPage from './views/Landing/LandingPage';
 import Header from './components/Header';
 import {
   BrowserRouter as Router,

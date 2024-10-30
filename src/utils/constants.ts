@@ -10,6 +10,9 @@ export const BREWARIES = [
   'Founders',
   'Dogfish Head',
 ];
+
+export const ORDER_BY = ['A to Z', 'Z to A'];
+
 export const INIT_BEER: BeerType = {
   id: '',
   name: '',

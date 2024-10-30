@@ -45,6 +45,7 @@ export const createBeerSlice: StateCreator<
       state.filterPrice = MAX_PRICE;
       state.filterBrand = '';
       state.filterStyle = '';
+      state.filterOrder = '';
     });
 
     return mappedBeers;

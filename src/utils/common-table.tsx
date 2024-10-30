@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from '../components/Button';
 
 interface Column<T> {
   Header: string;
@@ -12,7 +13,7 @@ interface TableProps<T> {
   onEdit: (item: T) => void;
 }
 
-const GenericTable = <T extends Record<string, any>>({
+export const CommonTable = <T extends Record<string, any>>({
   columns,
   data,
   onDelete,
@@ -42,7 +43,7 @@ const GenericTable = <T extends Record<string, any>>({
     <div>
       <div className="overflow-x-auto p-4">
         <table className="min-w-full bg-white border border-gray-200">
-          <thead className="bg-gray-500 sticky top-0">
+          <thead className="bg-gray-700 sticky top-0">
             <tr>
               {columns.map((column) => (
                 <th
@@ -92,27 +93,28 @@ const GenericTable = <T extends Record<string, any>>({
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex justify-between items-center mt-4 mx-4">
-        <button
+      <div className="flex justify-between items-center mt-4 mx-4 pb-4">
+        <Button
           onClick={handlePreviousPage}
+          variant="secondary"
+          size="small"
           disabled={currentPage === 1}
-          className="px-4 py-2 bg-orange-500 text-white rounded disabled:opacity-50"
         >
           Previous
-        </button>
+        </Button>
+
         <span>
           Page {currentPage} of {totalPages}
         </span>
-        <button
+        <Button
           onClick={handleNextPage}
+          variant="secondary"
+          size="small"
           disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-orange-500 text-white rounded disabled:opacity-50"
         >
           Next
-        </button>
+        </Button>
       </div>
     </div>
   );
 };
-
-export default GenericTable;
