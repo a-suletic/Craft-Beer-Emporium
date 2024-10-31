@@ -21,7 +21,9 @@ function GreedBeer() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-5 gap-28 p-12">
       {beers.map((beer) => (
-        <BeerCard beer={beer} />
+        <div key={beer.id}>
+          <BeerCard beer={beer} />
+        </div>
       ))}
     </div>
   );

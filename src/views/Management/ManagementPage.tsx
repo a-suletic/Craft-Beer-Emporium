@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from './Components/Sidebar/Sidebar';
 import BeerGraphs from './Components/Graphs/beer-graph';
 import { BeerType } from '../../types/beer_type';
-import { COLUMNS_BEER } from '../../utils/constants';
+import { COLUMNS_BEER, INIT_BEER } from '../../utils/constants';
 import { useStore } from '../../store/store';
 import AddBeerModal from './Components/BeerModal';
 import { useShallow } from 'zustand/react/shallow';
@@ -13,16 +13,30 @@ function ManagementPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
-  const { beers, addBeer, removeBeer, setSelectedForEdit, updateBeer } =
-    useStore(
-      useShallow((state) => ({
-        beers: state.displayBeers,
-        addBeer: state.addBeer,
-        removeBeer: state.removeBeer,
-        setSelectedForEdit: state.setSelectedForEdit,
-        updateBeer: state.updateBeer,
-      }))
-    );
+  const {
+    beers,
+    addBeer,
+    removeBeer,
+    setSelectedForEdit,
+    updateBeer,
+    fetchBeers,
+  } = useStore(
+    useShallow((state) => ({
+      beers: state.displayBeers,
+      addBeer: state.addBeer,
+      removeBeer: state.removeBeer,
+      setSelectedForEdit: state.setSelectedForEdit,
+      updateBeer: state.updateBeer,
+      fetchBeers: state.fetchBeers,
+    }))
+  );
+
+  useEffect(() => {
+    const getBeers = async () => {
+      await fetchBeers();
+    };
+    getBeers();
+  }, []);
 
   const handleEdit = (beer: BeerType) => {
     setIsEdit(true);

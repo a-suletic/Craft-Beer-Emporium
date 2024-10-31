@@ -12,7 +12,7 @@ REACT_BEER_API = https://ih-beers-api2.herokuapp.com/beers
 
 npm start
 
-####build application for production
+### build application for production
 
 - npm run build
 
