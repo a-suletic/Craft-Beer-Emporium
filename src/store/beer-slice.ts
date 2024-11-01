@@ -22,7 +22,7 @@ type BeerAction = {
   getSelected: (selectedId: string) => BeerType | undefined;
   setSelectedForEdit: (beer: BeerType) => void;
 };
-
+const apiEndpoint = process.env.REACT_APP_API_ENDPOINT!;
 export type BeerSlice = BeerState & BeerAction;
 
 export const createBeerSlice: StateCreator<
@@ -36,7 +36,7 @@ export const createBeerSlice: StateCreator<
   selected: INIT_BEER,
   selectedForEdit: INIT_BEER,
   fetchBeers: async () => {
-    const response = await axios.get(process.env.REACT_APP_API_ENDPOINT!);
+    const response = await axios.get(apiEndpoint);
     const mappedBeers = mapBeerApiToBeer(response.data);
     set((state) => {
       state.beers = mappedBeers;
