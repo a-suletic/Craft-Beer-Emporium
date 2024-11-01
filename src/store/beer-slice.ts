@@ -36,7 +36,7 @@ export const createBeerSlice: StateCreator<
   selected: INIT_BEER,
   selectedForEdit: INIT_BEER,
   fetchBeers: async () => {
-    const response = await axios.get(process.env.REACT_BEER_API!);
+    const response = await axios.get(process.env.REACT_APP_API_ENDPOINT!);
     const mappedBeers = mapBeerApiToBeer(response.data);
     set((state) => {
       state.beers = mappedBeers;
